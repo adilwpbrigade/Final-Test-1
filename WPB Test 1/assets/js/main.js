@@ -1,238 +1,207 @@
 $(document).ready(function () {
-  $(".hamburger").click(function () {
-    if ($(window).width() <= 767) { // mobile only
-      $(".secondary-nav").slideToggle(300);
+
+    // Hamburger toggle for mobile devices
+    function toggleSecondaryNav() {
+        if ($(window).width() <= 767) {
+            $(".secondary-nav").hide();
+        } else {
+            $(".secondary-nav").show();
+        }
     }
-  });
 
-  // Optional: reset nav when resizing back to desktop
-  $(window).resize(function () {
-    if ($(window).width() > 767) {
-      $(".secondary-nav").show(); // always visible on desktop
-    } else {
-      $(".secondary-nav").hide(); // keep hidden on mobile until toggled
-    }
-  }).resize(); // run once on load to set correct state
-    
- $(function () {
-  const mq = window.matchMedia("(max-width: 767px)"); // adjust breakpoint
+    // Run on page load and window resize
+    toggleSecondaryNav();
+    $(window).resize(toggleSecondaryNav);
 
-  function bindMobileHandlers() {
-    removeMobileHandlers();
+    // Hamburger click event to show/hide mobile nav
+    $(".hamburger").click(function () {
+        if ($(window).width() <= 767) {
+            $(".secondary-nav").slideToggle(300);
 
-    // Submenu toggle (arrow image)
-    $(document).on("click.mobileMenu", ".submenu-toggle", function (e) {
-      e.preventDefault();
-
-      const $this = $(this);
-      const $submenu = $this.next(".sub-menu");
-
-      // close siblings
-      $this.parent().siblings().find(".sub-menu").slideUp(300).removeClass("open");
-      $this.parent().siblings().find(".submenu-toggle").removeClass("active");
-
-      // toggle current
-      $submenu.slideToggle(300).toggleClass("open");
-      $this.toggleClass("active");
+            // Reset submenus when hamburger is clicked
+            $(".sub-menu, .sub-sub-menu").slideUp(0).removeClass("open").removeAttr("style");
+            $(".submenu-toggle, .subsubmenu-toggle").removeClass("active");
+        }
     });
 
-    // Sub-sub-menu toggle (arrow image inside sub-menu li)
-    $(document).on("click.mobileMenu", ".subsubmenu-toggle", function (e) {
-      e.preventDefault();
+    // Mobile submenu handlers
+    (function () {
+        const mq = window.matchMedia("(max-width: 767px)");
 
-      const $this = $(this);
-      const $subSub = $this.next(".sub-sub-menu");
+        function bindMobileHandlers() {
+            removeMobileHandlers();
 
-      // close siblings
-      $this.parent().siblings().find(".sub-sub-menu").slideUp(300).removeClass("open");
-      $this.parent().siblings().find(".subsubmenu-toggle").removeClass("active");
+            // Toggle main submenus
+            $(document).on("click.mobileMenu", ".submenu-toggle", function (e) {
+                e.preventDefault();
+                const $this = $(this);
+                const $submenu = $this.next(".sub-menu");
 
-      // toggle current
-      $subSub.slideToggle(300).toggleClass("open");
-      $this.toggleClass("active");
+                $this.parent().siblings().find(".sub-menu").slideUp(300).removeClass("open");
+                $this.parent().siblings().find(".submenu-toggle").removeClass("active");
+
+                $submenu.slideToggle(300).toggleClass("open");
+                $this.toggleClass("active");
+            });
+
+            // Toggle sub-submenus
+            $(document).on("click.mobileMenu", ".subsubmenu-toggle", function (e) {
+                e.preventDefault();
+                const $this = $(this);
+                const $subSub = $this.next(".sub-sub-menu");
+
+                $this.parent().siblings().find(".sub-sub-menu").slideUp(300).removeClass("open");
+                $this.parent().siblings().find(".subsubmenu-toggle").removeClass("active");
+
+                $subSub.slideToggle(300).toggleClass("open");
+                $this.toggleClass("active");
+            });
+        }
+
+        // Remove mobile menu click handlers
+        function removeMobileHandlers() {
+            $(document).off(".mobileMenu");
+        }
+
+        // Apply or remove handlers depending on screen size
+        function syncHandlers() {
+            if (mq.matches) {
+                bindMobileHandlers();
+            } else {
+                removeMobileHandlers();
+                $(".sub-menu, .sub-sub-menu").removeAttr("style").removeClass("open");
+                $(".submenu-toggle, .subsubmenu-toggle").removeClass("active");
+            }
+        }
+
+        syncHandlers();
+
+        // Listen for screen size changes
+        if (mq.addEventListener) mq.addEventListener("change", syncHandlers);
+        else if (mq.addListener) mq.addListener(syncHandlers);
+    })();
+
+    // Top bar close button
+    $(".close-btn").click(function () {
+        $(".top-bar").slideUp(300);
     });
 
-    // Reset on hamburger click
-    $(document).on("click.mobileMenu", ".hamburger", function () {
-      $(".sub-menu, .sub-sub-menu")
-        .slideUp(0)
-        .removeClass("open")
-        .removeAttr("style");
-      $(".submenu-toggle, .subsubmenu-toggle").removeClass("active");
+    // Swiper slider for main section
+    var swiper = new Swiper(".main-section-slider", {
+        spaceBetween: 28,
+        loop: true,
+        pagination: { el: ".main-section-pagination", clickable: true },
+        navigation: { nextEl: ".main-section-next", prevEl: ".main-section-prev" },
+        autoplay: { delay: 3000, disableOnInteraction: false },
+        breakpoints: {
+            0: { slidesPerView: 1, slidesPerGroup: 1, navigation: { enabled: false } },
+            500: { slidesPerView: 2, slidesPerGroup: 1, navigation: { enabled: false } },
+            768: { slidesPerView: 3, slidesPerGroup: 1, navigation: { enabled: false }, spaceBetween: 31 },
+            1024: { slidesPerView: 4, slidesPerGroup: 1, navigation: { enabled: true } },
+        },
     });
-  }
 
-  function removeMobileHandlers() {
-    $(document).off(".mobileMenu");
-  }
+    // Swiper slider for hero section
+    var mainswiper = new Swiper(".hero-section-Swiper", {
+        slidesPerView: 1,
+        loop: true,
+        pagination: { el: ".hero-section-pagination", clickable: true },
+        navigation: { nextEl: ".hero-section-next", prevEl: ".hero-section-prev" },
+    });
 
-  function syncHandlers() {
-    if (mq.matches) {
-      bindMobileHandlers();
-    } else {
-      removeMobileHandlers();
-      $(".sub-menu, .sub-sub-menu").removeAttr("style").removeClass("open");
-      $(".submenu-toggle, .subsubmenu-toggle").removeClass("active");
-    }
-  }
-
-  syncHandlers();
-
-  if (mq.addEventListener) {
-    mq.addEventListener("change", syncHandlers);
-  } else if (mq.addListener) {
-    mq.addListener(syncHandlers); // older Safari
-  }
-});
-$(".close-btn").click(function () {
-  $(".top-bar").slideUp(300, function () {
-    $(".primary-nav").css("top", "0");
-    $(".secondary-nav").css("top", "60px"); // only height of primary-nav
-    $("body").css("padding-top", "122px"); // adjust content push
-
-     if ($(window).width() < 768){
-            $("body").css("padding-top", "0px");
-    }
-
-
-  });
-});
-
-// ------------------------Swiper slider -------------------------------
-var swiper = new Swiper(".main-section-slider", {
-  spaceBetween: 28,
-  loop: true, // keep looping
-
-  pagination: {
-    el: ".main-section-pagination", // ✅ scoped
-    clickable: true,
-  },
-
-  navigation: {
-    nextEl: ".main-section-next", // ✅ scoped
-    prevEl: ".main-section-prev", // ✅ scoped
-  },
-
-  autoplay: {
-    delay: 3000,
-    disableOnInteraction: false,
-  },
-
-  breakpoints: {
-    0: {
-      slidesPerView: 1,
-      slidesPerGroup: 1,
-      navigation: {
-        enabled: false, // ✅ no nav on mobile
-      },
-    },
-        500: {
-      slidesPerView: 2,
-      slidesPerGroup: 1,
-      navigation: {
-        enabled: false, // ✅ no nav on mobile
-      },
-    },
-    768: {
-      slidesPerView: 3,
-      slidesPerGroup: 1,
-      navigation: {
-        enabled: false, // ✅ still off on tablet
-      },
-      spaceBetween: 31,
-       
-    },
-    1024: {
-      slidesPerView: 4,
-      slidesPerGroup: 1,
-      navigation: {
-        enabled: true, // ✅ re-enable on desktop
-      },
-    },
-  },
-});
-
-
-var mainswiper = new Swiper(".hero-section-Swiper", {
-  slidesPerView: 1,
-  loop: true,
-
-  pagination: {
-    el: ".hero-section-pagination", 
-    clickable: true,
-  },
-  navigation: {
-    nextEl: ".hero-section-next",  
-    prevEl: ".hero-section-prev",  
-  },
-});
-
-
-// ---------------------------------------- Tab -----------------------------------
-
-
-  $(".tabcontent").hide();
-
-  // Open the first tab by default
-  $(".tabcontent:first").show();
-  $(".tablinks:first").addClass("active");
-
-  // On click tab button
-  $(".tablinks").click(function (e) {
-    e.preventDefault();
-
-    // Remove active class from all
-    $(".tablinks").removeClass("active");
-    // Add active to clicked
-    $(this).addClass("active");
-
-    // Get target id from button's inner onclick attr OR define data attr
-    var target = $(this).attr("onclick").match(/'([^']+)'/)[1];
-
-    // Hide all and show the target
+    // Tabs functionality
     $(".tabcontent").hide();
-    $("#" + target).show();
-  });
+    $(".tabcontent:first").show();
+    $(".tablinks:first").addClass("active");
 
-// Always keep first accordion open on load
-var $accordion = $(".accordion");
-var $headers = $accordion.find(".accordion-header");
-var $contents = $accordion.find(".accordion-content");
+    $(".tablinks").click(function (e) {
+        e.preventDefault();
+        $(".tablinks").removeClass("active");
+        $(this).addClass("active");
 
-// Ensure each header has an arrow span
-$headers.each(function() {
-  if ($(this).find(".accordion-arrow").length === 0) {
-    $(this).append('<span class="accordion-arrow"></span>');
-  }
-});
+        var target = $(this).data("target");
+        $(".tabcontent").hide();
+        $("#" + target).show();
+    });
 
-// Close all, then open the first one by default
-$contents.hide().removeClass("open");
-$contents.first().addClass("open").slideDown(200);
-$headers.removeClass("active");
-$headers.first().addClass("active");
+    // Accordion functionality
+    var $accordion = $(".accordion");
+    var $headers = $accordion.find(".accordion-header");
+    var $contents = $accordion.find(".accordion-content");
 
-// Click behaviour - allow toggle
-$headers.on("click", function () {
-  var $h = $(this);
-  var $c = $h.next(".accordion-content");
+    // Add arrows if not present
+    $headers.each(function () {
+        if ($(this).find(".accordion-arrow").length === 0) {
+            $(this).append('<span class="accordion-arrow"></span>');
+        }
+    });
 
-  if ($c.hasClass("open")) {
-    // If already open → close it (so all can be closed)
-    $c.stop(true, true).removeClass("open").slideUp(200);
-    $h.removeClass("active");
-  } else {
-    // Close others
-    $contents.stop(true, true).removeClass("open").slideUp(200);
+    // Initialize accordion state
+    $contents.hide().removeClass("open");
+    $contents.first().addClass("open").slideDown(200);
     $headers.removeClass("active");
+    $headers.first().addClass("active");
 
-    // Open clicked one
-    $c.stop(true, true).addClass("open").slideDown(200);
-    $h.addClass("active");
-  }
+    // Accordion toggle click event
+    $headers.on("click", function () {
+        var $h = $(this);
+        var $c = $h.next(".accordion-content");
+
+        if ($c.hasClass("open")) {
+            $c.stop(true, true).removeClass("open").slideUp(200);
+            $h.removeClass("active");
+        } else {
+            $contents.stop(true, true).removeClass("open").slideUp(200);
+            $headers.removeClass("active");
+
+            $c.stop(true, true).addClass("open").slideDown(200);
+            $h.addClass("active");
+        }
+    });
+
+    // ------------------------------
+    // Video Popup for YouTube (works with youtu.be, watch?v, embed)
+    // ------------------------------
+
+    // Function to convert any YouTube URL to embed URL
+    function convertToEmbed(url) {
+        let videoId = "";
+
+        if (url.includes("youtu.be/")) { // Short URL
+            videoId = url.split("youtu.be/")[1].split(/[?&]/)[0];
+        } else if (url.includes("youtube.com/watch?v=")) { // Watch URL
+            videoId = url.split("v=")[1].split(/[?&]/)[0];
+        } else if (url.includes("youtube.com/embed/")) { // Already embed
+            return url;
+        }
+
+        return "https://www.youtube.com/embed/" + videoId;
+    }
+
+    // Open popup on play button click
+    $(".play-btn").on("click", function () {
+        const popup = $(".video-popup");
+        const videoURL = $(this).data("video");
+        const embedURL = convertToEmbed(videoURL) + "?autoplay=1";
+
+        popup.fadeIn(300);
+        popup.find("iframe").attr("src", embedURL);
+        $("body").css("overflow", "hidden");
+    });
+
+    // Close popup when clicking overlay or close button
+    $(".video-popup, .close-video").on("click", function (e) {
+        if (!$(e.target).closest("iframe").length) {
+            const popup = $(".video-popup");
+            popup.fadeOut(300);
+            popup.find("iframe").attr("src", ""); // stop video
+            $("body").css("overflow", "");
+        }
+    });
+
+    // Prevent closing when clicking inside iframe
+    $(".video-popup iframe").on("click", function (e) {
+        e.stopPropagation();
+    });
+
 });
-
-});
-
-
-

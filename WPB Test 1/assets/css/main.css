@@ -20,7 +20,7 @@
 
 body {
     background-image: url('../images/background-img.png');
-    padding-top: 172px;
+
 }
 
 h1 {
@@ -57,6 +57,9 @@ h3 {
     width: 100%;
     margin: 0 auto;
      position: relative; /* add this */
+}
+.top-bar{
+    min-height:50px ;
 }
 
 .top-bar p {
@@ -126,6 +129,9 @@ h3 {
     display: inline-block;
     transform: skew(15deg);
 }
+.logo-flex > a > img{
+    display: block;
+} 
 
 /* ================= CONTAINER ================= */
 .container {
@@ -429,13 +435,15 @@ ul.sub-sub-menu>li>a:hover {
 .close-btn {
     cursor: pointer;
 }
+header{
+    position: sticky;
+    top:0;
+    background-image:  url('../images/background-img.png') ;
+    z-index: 999;
+
+}
 .sticky-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1000;
-   background-image: url('../images/background-img.png');
+
 
 }
 /* --------------------------------Hero section ---------------------------------------------  */
@@ -503,10 +511,11 @@ ul.sub-sub-menu>li>a:hover {
   margin-top: 34px;
   letter-spacing: 1px; /* changed from 1% to 1px */
 }
-.pop-up img {
+.pop-up img:first-of-type {
   width: 100%;
   max-width: 400px;
   height: auto;
+
 }
 
 /* ARROWS OUTSIDE SLIDER */
@@ -932,7 +941,7 @@ span.tab-btn {
     position: absolute;
     right: 20px;
     top: 50%;
-    transform: translateY(-50%) rotate(45deg);
+    transform: translateY(-80%) rotate(45deg);
     /* ▲ upward when active */
 
     border: solid var(--color-primary);
@@ -1289,7 +1298,60 @@ span.tab-btn {
 
 
 
+/* < --------------- play button ------------------> */
+img.play-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    transition: transform 0.3s ease; 
+}
 
+img.play-btn:hover {
+    transform: translate(-50%, -50%) scale(1.15); 
+}
+
+.pop-up {
+    position: relative;
+}
+
+.video-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    
+    height: 100%;
+    background: #012C1FE5;
+    display: none;
+    justify-content: center; 
+    align-items: center;     
+    z-index: 99999;
+}
+
+
+.video-popup-inner {
+    background: transparent;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    max-width: 1015px;
+ 
+    padding: 0 15px;
+   
+    
+
+}
+
+
+.video-popup iframe {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border: none;
+}
 
 
 
@@ -1304,9 +1366,7 @@ span.tab-btn {
     h1 {
         font-size: 40px;
     }
-    body{
-        padding-top: 170px;
-    }
+  
 
     .top-bar .container-fluid img {
         right: 15px;
@@ -1704,7 +1764,7 @@ q
         display: none;
     }
 
-    .pop-up img {
+    .pop-up img:first-of-type {
         width: 100%;
         /* scale to parent container */
         height: 100%;
@@ -1714,6 +1774,8 @@ q
         min-width: 145px;
         /* don’t go smaller */
         max-width: 320px;
+        display: block;
+        margin: 0 auto;
     }
 
     .hero-section .swiper-pagination {
@@ -1774,9 +1836,7 @@ q
 
 
   
-  body{
-    padding-top: 0px;
-  }
+
     .main-section-prev.swiper-button-prev,
 .main-section-next.swiper-button-next,.main-section-pagination.swiper-pagination {
   display: none !important;
