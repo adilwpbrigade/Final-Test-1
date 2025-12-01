@@ -236,6 +236,14 @@ h3 {
     /* remove li padding */
 
 }
+.hero-section-prev , .hero-section-next{
+    cursor: pointer;
+}
+.main-section-prev , .main-section-next{
+    cursor: pointer;
+}
+
+
 .hero-section-prev svg{
     transform: rotate(180deg);
 }
@@ -247,6 +255,10 @@ h3 {
 }
 .main-section-prev svg{
     transform: rotate(180deg);
+}
+.secondary-nav > nav > form > input::placeholder {
+    color: white;
+    opacity: 0.5;
 }
 
 
@@ -1364,7 +1376,14 @@ img.play-btn:hover {
 }
 
 
+.national-champions .card-image{
+    position: relative;
+}
 
+.national-champions .card-image img{
+    position: absolute;
+}
+ 
 
 
 
@@ -1553,6 +1572,17 @@ q
     .top-bar {
         padding: 15px 15px;
     }
+    
+
+   .secondary-nav>nav>ul>li>ul.sub-menu>li>a {
+    width: calc(100% - 40px);
+   }
+
+  ul.sub-sub-menu{
+    width: 90%;
+  }
+
+
 
     .top-bar p {
         text-align: left;
@@ -1890,6 +1920,13 @@ q
     clip-path: none;         
 
   }
+      .national-champions .card-image{
+    position: relative;
+}
+
+.national-champions .card-image img{
+    position: static;
+}
       .national-champions .card:nth-child(odd) .card-image , .national-champions .card:nth-child(even) .card-image {
     clip-path: none;
 }
