@@ -1825,7 +1825,7 @@ q
         transform: none;
     }
         .hero-section-pagination{
-        bottom: 10px;
+        bottom: 0px !important;
     }
     .hero-slider-wrapper{
         padding: 20px;
