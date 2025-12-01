@@ -18,7 +18,7 @@ $(document).ready(function () {
         if ($(window).width() <= 767) {
             $(".secondary-nav").slideToggle(300);
 
-            // Reset submenus when hamburger is clicked
+            
             $(".sub-menu, .sub-sub-menu").slideUp(0).removeClass("open").removeAttr("style");
             $(".submenu-toggle, .subsubmenu-toggle").removeClass("active");
         }
