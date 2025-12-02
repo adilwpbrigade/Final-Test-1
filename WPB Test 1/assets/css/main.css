@@ -1608,7 +1608,8 @@ q
 
     .secondary-nav {
         display: none;
-        height: 100vh;
+        height: calc(100vh - 60px);
+        overflow-y: auto;
     }
 
     .secondary-nav>nav {
