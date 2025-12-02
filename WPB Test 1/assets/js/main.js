@@ -228,5 +228,6 @@ $(document).ready(function () {
     $(".video-popup iframe").on("click", function (e) {
         e.stopPropagation();
     });
+       $("#year").text(new Date().getUTCFullYear());
 
 });

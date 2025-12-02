@@ -89,6 +89,7 @@ h3 {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    min-height: 60px;
    
 }
 
@@ -100,8 +101,9 @@ h3 {
 
 .primary-nav-btn {
     display: flex;
-    gap: 12px;
-    padding: 10px 0px
+    flex-wrap: wrap;
+    gap: 10px 0px;
+    padding: 10px 0px 10px 40px;
 }
 
 .primary-nav-btn>a {
@@ -111,23 +113,34 @@ h3 {
     color: var(--color-primary);
     text-decoration: none;
     text-transform: uppercase;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 149px;
-    height: 40px;
-    background-color: var(--color-secondary);
-    transform: skew(-15deg);
-    transition: background-color 0.3s ease;
+     clip-path: polygon(10% 0, 100% 0%, 90% 100%, 0% 100%);   
+    min-width: 165px;
+    min-height: 40px;
+    background:linear-gradient(rgba(27, 125, 59, 0.5), rgba(27, 125, 59, 0.5)),
+        url('../images/background-img.png');
+     text-align: center;
+
+
+    transition: 0.3s all ;
 }
+
+.primary-nav-btn>a:nth-child(even){
+    background: linear-gradient(rgba(8, 81, 45, 0.5), rgba(8, 81, 45, 0.5)),
+        url('../images/background-img.png');
+} 
 
 .primary-nav-btn>a:hover {
-    background-color: var(--color-danger);
-}
+    background: linear-gradient(rgba(8, 81, 45, 0.5), rgba(8, 81, 45, 0.5)),
+        url('../images/background-img.png'); }
 
+.primary-nav-btn>a:nth-child(even):hover{
+     background:linear-gradient(rgba(27, 125, 59, 0.5), rgba(27, 125, 59, 0.5)),
+        url('../images/background-img.png');
+}
 .primary-nav-btn>a span {
     display: inline-block;
-    transform: skew(15deg);
+         padding: 8px 30px;
+
 }
 .logo-flex > a > img{
     display: block;
@@ -276,8 +289,15 @@ h3 {
     transition: background-color 0.3s ease-in-out;
 }
 
-.secondary-nav>nav>ul>li>ul.sub-menu>li>a:hover {
-    background-color: var(--color-secondary);
+.secondary-nav>nav>ul>li>ul.sub-menu>li:hover {
+    background: linear-gradient(rgba(27, 125, 59, 0.5), rgba(27, 125, 59, 0.5)),
+        url('../images/background-img.png');
+    ;
+}
+.secondary-nav>nav>ul>li>ul.sub-menu>li:focus-within{
+     background: linear-gradient(rgba(27, 125, 59, 0.5), rgba(27, 125, 59, 0.5)),
+        url('../images/background-img.png');
+    ;
 }
 
 /* ================= SUB-SUB-MENU ================= */
@@ -311,8 +331,10 @@ ul.sub-sub-menu>li>a {
     transition: background-color 0.3s ease-in-out;
 }
 
-ul.sub-sub-menu>li>a:hover {
-    background-color: var(--color-secondary);
+ul.sub-sub-menu>li:hover {
+    background: linear-gradient(rgba(27, 125, 59, 0.5), rgba(27, 125, 59, 0.5)),
+        url('../images/background-img.png');
+    ;
 }
 
 /* ================= Reebok section ================= */
@@ -321,6 +343,22 @@ ul.sub-sub-menu>li>a:hover {
     background-color: var(--color--green);
     overflow: hidden;
 }
+.logo-flex {
+    max-width: 145px;
+    
+}
+
+.logo-flex > a {
+    display: block;
+}
+
+.logo-flex >  a > img:first-of-type {
+    width: 100%;
+    height: auto;    
+    object-fit: contain;
+    display: block;   
+}
+
 
 .reebook-logo-flex {
     display: flex;
@@ -396,8 +434,15 @@ ul.sub-sub-menu>li>a:hover {
     font-family: var(--font--oswald);
     font-weight: 500;
     font-size: 16px;
+    transition: all 0.3s;
 
 }
+
+.footer-nav ul li a:hover{
+     
+    color: var(--color--green);
+}
+
 
 .footer-social-icons {
     display: flex;
@@ -405,7 +450,14 @@ ul.sub-sub-menu>li>a:hover {
     column-gap: 13px;
     justify-content: center;
     margin: 14px 0px;
-
+ 
+}
+.footer-social-icons a{
+       transition: all 0.3s;
+       display: block;
+}
+.footer-social-icons a:hover{
+    transform: scale(1.2);
 }
 
 .copyright {
@@ -663,16 +715,12 @@ header{
 }
 
 .search-card-form>button {
-    display: flex;
-    justify-content: center;
-    width: 94px;
-    height: 40px;
-    align-items: center;
-
-
-
-    transform: skewX(-14.5deg);
-    margin: 16px 6px 0 auto;
+        clip-path: polygon(10% 0, 100% 0%, 90% 100%, 0% 100%);
+    min-width: 103px;
+     margin:16px 0px 0px auto;
+     min-height: 40px;
+    display: block;
+    
     background: linear-gradient(rgba(27, 125, 59, 0.5), rgba(27, 125, 59, 0.5)),
         url('../images/background-img.png');
     border: 0px;
@@ -683,11 +731,17 @@ header{
     font-weight: 600;
     font-family: var(--font--oswald);
     text-transform: uppercase;
+    cursor: pointer;
     line-height: 100%;
-    transform: skewX(14.5deg);
+      padding: 8px 30px;
+          display:inline-block;
     color: var(--color-primary);
+    transition: all 0.3s;
 }
-
+.search-card-form>button:hover{
+    background: linear-gradient(rgba(9, 198, 71, 0.5), rgba(9, 198, 71, 0.5)),
+        url('../images/background-img.png');
+} 
 
 /* ------------------------------------EVENTS----------------------------------------------------- */
 
@@ -730,6 +784,9 @@ header{
     font-size: 18px;
     color: var(--color-primary);
     text-transform: uppercase;
+}
+.events-main>div>a:hover{
+     text-decoration: none;;
 }
 
 .events-main>div>p {
@@ -830,10 +887,11 @@ header{
 }
 
 .categories-main-2 ul li {
-    padding: 3.5px 18px;
+   
     transform: skew(-15deg);
     background: linear-gradient(rgba(27, 125, 59, 0.5), rgba(27, 125, 59, 0.5)),
         url('../images/background-img.png');
+        transition: 0.3s all;
 
 }
 
@@ -841,14 +899,17 @@ header{
     display: inline-block;
     transform: skew(15deg);
     text-decoration: none;
+     padding: 3.5px 18px;
     color: var(--color-primary);
     font-size: 14px;
     font-weight: 400;
     font-family: var(--font--roboto);
     text-transform: capitalize;
     line-height: 18px;
+}
 
-
+.categories-main-2 ul li:hover{
+    background: var(--color--green);
 }
 
 /* ================= Slider Main ================= */
@@ -1010,6 +1071,12 @@ span.tab-btn {
     padding: 0px 15px;
     margin: 0px auto;
 }
+.form-container input,
+.form-container select, .form-container textarea {
+    font-family: var(--font--roboto);
+    font-size: 14px;
+
+}
 
 .form-container form>textarea {
     width: 100%;
@@ -1080,13 +1147,16 @@ span.tab-btn {
     letter-spacing: 0%;
     color: var(--color-primary);
     cursor: pointer;
-    background-color: black;
+    background-color: rgba(1, 44, 31, 1);
     text-align: center;
     border: none;
     padding: 10px 59px;
     text-transform: uppercase;
+    transition: all 0.3s;
 }
-
+.submit-btn button:hover{
+    background-color: var(--color--green);
+}
 .radio-btns {
     display: flex;
     gap: 10px;
@@ -1125,10 +1195,12 @@ span.tab-btn {
     width: 100%;
     /* full width */
     display: block;
-    height: 162px;
+    max-height: 162px;
+      aspect-ratio: 4 / 3;    
     object-fit: cover;
     object-position: inherit;
 }
+
 
 .post {
 
@@ -1273,11 +1345,11 @@ span.tab-btn {
 }
 
 .national-champions .card:nth-child(odd) .card-image {
-    clip-path: polygon(0 0, 100% 0, 70% 100%, 0 100%, 0% 50%);
+    clip-path:polygon(0 0, 100% 0, 87% 100%, 0% 100%); 
 }
 
 .national-champions .card:nth-child(even) .card-image {
-    clip-path: polygon(100% 0, 0 0, 30% 100%, 100% 100%, 100% 50%);
+    clip-path: polygon(0 0, 100% 0%, 100% 100%, 13% 100%)
 }
 
 .national-champions .card-image img {
@@ -1298,7 +1370,7 @@ span.tab-btn {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    padding: 0px 25px;
+    padding: 40px 25px;
 
 
 }
@@ -1385,7 +1457,57 @@ img.play-btn:hover {
 }
  
 
+.radio-btns {
+  display: flex;
 
+  gap: 10px;
+}
+
+.radio-btns input[type="radio"] {
+  display: none; /* hide default radio button */
+}
+
+.radio-btns label {
+  position: relative;
+  padding-left: 30px; /* space for the custom radio */
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1.5;
+  user-select: none;
+}
+
+/* custom radio circle */
+.radio-btns label::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 22px;   /* increase width */
+  height: 22px;  /* increase height */
+
+  border-radius: 50%;
+  background: #fff;
+  box-sizing: border-box;
+}
+.form-container textarea{
+    padding: 10px;
+}
+
+.radio-btns input[type="radio"]:checked + label::after {
+  content: "";
+  position: absolute;
+  left: 11px;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 14px;   
+  height: 14px;
+  background: green;
+  border-radius: 50%;
+}
+.tabcontent{
+    min-height: 412px;
+}
 
 /* ================= MEDIA QUERIES ================= */
 
@@ -1626,6 +1748,8 @@ q
         width: 100%;
         gap: 1px;
         padding: 0px;
+        flex-wrap: nowrap;
+    
     }
 
     .primary-nav {
@@ -1644,7 +1768,9 @@ q
     .secondary-nav>nav {
         padding-top: 10px;
     }
-
+    .primary-nav-btn > a{
+        clip-path: none;
+    }
     .secondary-nav>nav>form {
         width: 100%;
     }
@@ -1675,9 +1801,11 @@ q
         align-items: center;
     }
 
+
     .primary-nav-btn>a {
         transform: none;
         width: 50%;
+        min-width: auto;
 
     }
 
@@ -1696,6 +1824,7 @@ q
 
     .logo-flex {
         padding: 0 15px;
+        max-width: 100%;
     }
 
     .secondary-nav>nav>ul>li:hover>ul.sub-menu,
@@ -1779,6 +1908,7 @@ q
     .accordion-header {
         line-height: 24px;
         font-size: 16px;
+        padding: 15px 40px 15px 20px;
     }
 
     .main-spacing {
@@ -1916,6 +2046,11 @@ q
     height: auto;            
     margin-bottom: 30px;     
   }
+  .post img{
+    max-height: unset;
+    aspect-ratio: 4 / 3;
+    object-fit: contain; 
+  }
    .national-champions .card-image {
     flex: none;              
     clip-path: none;         
@@ -1940,6 +2075,7 @@ q
 
     .post {
         max-width: 100%;
+        background-color: var(--color-primary);
     }
     .main-section-slider-wrapper{
         margin-bottom: 40px;
