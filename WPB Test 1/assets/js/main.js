@@ -139,8 +139,10 @@ $(document).ready(function () {
     var mainswiper = new Swiper(".hero-section-Swiper", {
         slidesPerView: 1,
         loop: true,
+        spaceBetween: 20,
         pagination: { el: ".hero-section-pagination", clickable: true },
         navigation: { nextEl: ".hero-section-next", prevEl: ".hero-section-prev" },
+
     });
 
     // ------------------------------

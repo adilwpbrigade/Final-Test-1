@@ -6,10 +6,21 @@
     --color-secondary: rgba(8, 81, 45, 0.5);
     --color-danger: rgba(27, 125, 59, 0.4);
     --color--green: rgba(9, 198, 71, 0.5);
-
+    --background-primary: linear-gradient(rgba(27, 125, 59, 0.5), rgba(27, 125, 59, 0.5)),
+        url('../images/background-img.png');
+    --background-secondary: linear-gradient(rgba(8, 81, 45, 0.5), rgba(8, 81, 45, 0.5)),
+        url('../images/background-img.png');
     /* Fonts */
     --font--roboto: "Roboto", sans-serif;
     --font--oswald: "Oswald", sans-serif;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
 }
 
 * {
@@ -69,6 +80,8 @@ h3 {
     font-family: var(--font--roboto);
     font-size: 14px;
     font-weight: 400;
+    max-width: 1300px;
+    margin: 0 auto;
     text-align: center;
     padding: 0px 100px;
 }
@@ -119,8 +132,7 @@ h3 {
     clip-path: polygon(10% 0, 100% 0%, 90% 100%, 0% 100%);
     min-width: 165px;
     min-height: 40px;
-    background: linear-gradient(rgba(27, 125, 59, 0.5), rgba(27, 125, 59, 0.5)),
-        url('../images/background-img.png');
+    background: var(--background-primary);
     text-align: center;
 
 
@@ -128,18 +140,15 @@ h3 {
 }
 
 .primary-nav-btn>a:nth-child(even) {
-    background: linear-gradient(rgba(8, 81, 45, 0.5), rgba(8, 81, 45, 0.5)),
-        url('../images/background-img.png');
+    background: var(--background-secondary)
 }
 
 .primary-nav-btn>a:hover {
-    background: linear-gradient(rgba(8, 81, 45, 0.5), rgba(8, 81, 45, 0.5)),
-        url('../images/background-img.png');
+    background: var(--background-secondary)
 }
 
 .primary-nav-btn>a:nth-child(even):hover {
-    background: linear-gradient(rgba(27, 125, 59, 0.5), rgba(27, 125, 59, 0.5)),
-        url('../images/background-img.png');
+    background: var(--background-primary);
 }
 
 .primary-nav-btn>a span {
@@ -308,14 +317,12 @@ h3 {
 }
 
 .secondary-nav>nav>ul>li>ul.sub-menu>li:hover {
-    background: linear-gradient(rgba(27, 125, 59, 0.5), rgba(27, 125, 59, 0.5)),
-        url('../images/background-img.png');
+    background: var(--background-primary);
     ;
 }
 
 .secondary-nav>nav>ul>li>ul.sub-menu>li:focus-within {
-    background: linear-gradient(rgba(27, 125, 59, 0.5), rgba(27, 125, 59, 0.5)),
-        url('../images/background-img.png');
+    background: var(--background-primary);
     ;
 }
 
@@ -351,8 +358,7 @@ ul.sub-sub-menu>li>a {
 }
 
 ul.sub-sub-menu>li:hover {
-    background: linear-gradient(rgba(27, 125, 59, 0.5), rgba(27, 125, 59, 0.5)),
-        url('../images/background-img.png');
+    background: var(--background-primary);
     ;
 }
 
@@ -723,8 +729,7 @@ header {
 }
 
 .search-card-header {
-    background: linear-gradient(rgba(27, 125, 59, 0.5), rgba(27, 125, 59, 0.5)),
-        url('../images/background-img.png');
+    background: var(--background-primary);
     padding: 13px 20px;
 }
 
@@ -753,8 +758,7 @@ header {
     min-height: 40px;
     display: block;
 
-    background: linear-gradient(rgba(27, 125, 59, 0.5), rgba(27, 125, 59, 0.5)),
-        url('../images/background-img.png');
+    background: var(--background-primary);
     border: 0px;
 }
 
@@ -781,8 +785,7 @@ header {
 
 .events-header {
     padding: 13px 20px;
-    background: linear-gradient(rgba(27, 125, 59, 0.5), rgba(27, 125, 59, 0.5)),
-        url('../images/background-img.png');
+    background: var(--background-primary);
 
 }
 
@@ -857,8 +860,7 @@ header {
 
 .categories-header {
     padding: 13.5px 20px;
-    background: linear-gradient(rgba(27, 125, 59, 0.5), rgba(27, 125, 59, 0.5)),
-        url('../images/background-img.png');
+    background: var(--background-primary);
 }
 
 .categories-header h3 {
@@ -924,8 +926,7 @@ header {
 .categories-main-2 ul li {
 
     transform: skew(-15deg);
-    background: linear-gradient(rgba(27, 125, 59, 0.5), rgba(27, 125, 59, 0.5)),
-        url('../images/background-img.png');
+    background: var(--background-primary);
     transition: 0.3s all;
 
 }
@@ -996,8 +997,7 @@ span.tab-btn {
 
 .tab {
     overflow: hidden;
-    background: linear-gradient(rgba(27, 125, 59, 0.5), rgba(27, 125, 59, 0.5)),
-        url('../images/background-img.png');
+    background: var(--background-primary);
     padding: 0 46px;
     display: flex;
 }
@@ -1051,8 +1051,7 @@ span.tab-btn {
     font-weight: 600;
     font-size: 18px;
     line-height: 100%;
-    background: linear-gradient(rgba(27, 125, 59, 0.5), rgba(27, 125, 59, 0.5)),
-        url('../images/background-img.png');
+    background: var(--background-primary);
 }
 
 .accordion-arrow {
@@ -1095,8 +1094,7 @@ span.tab-btn {
 /* ------------------------------- Form section ------------------------- */
 
 .Form-section {
-    background: linear-gradient(rgba(27, 125, 59, 0.5), rgba(27, 125, 59, 0.5)),
-        url('../images/background-img.png');
+    background: var(--background-primary);
     padding: 35px 0px;
 
 }
@@ -1275,8 +1273,7 @@ span.tab-btn {
 
 .footer {
 
-    background: linear-gradient(rgba(27, 125, 59, 0.5), rgba(27, 125, 59, 0.5)),
-        url('../images/background-img.png');
+    background: var(--background-primary);
     text-align: center;
 }
 
@@ -1374,8 +1371,7 @@ span.tab-btn {
 
 .national-champions .card:nth-child(even) {
     flex-direction: row-reverse;
-    background: linear-gradient(rgba(27, 125, 59, 0.5), rgba(27, 125, 59, 0.5)),
-        url('../images/background-img.png');
+    background: var(--background-primary);
 }
 
 .national-champions .card-image {
@@ -1673,13 +1669,13 @@ img.play-btn:hover {
     }
 }
 
-@media (min-width: 768px) and (max-width: 840px) {
+@media (min-width: 768px) and (max-width: 870px) {
     .secondary-nav>nav>ul>li>a {
         padding: 18px 14px;
     }
 
     .secondary-nav>nav>form>input {
-        width: 250px;
+        width: 200px;
     }
 
     .content .swiper-button-next,
@@ -1710,42 +1706,15 @@ img.play-btn:hover {
 
 }
 
-/* @media only screen and (max-width: 1023px) {
-
-    .content .swiper-button-next,
-    .swiper-button-prev {
-        display: none !important;
-    }
-
-    .main-section-slider {
-        margin: 0px !important;
-    }
-
-    .post {
-        max-width: calc((100% - 30px) / 2);
-    }
-
-    .national-champions .card-image {
-        flex: 0 0 50%;
-    }
-
-    .national-champions .card-content {
-        padding: 0 10px;
-    }
-
-    .hero-section-flex {
-        width: 100%;
-        padding: 0px 15px;
-    }
-
-}  */
 
 
 @media only screen and (max-width: 767px) {
     .top-bar {
         padding: 15px 15px;
     }
-
+.shoes-box{
+      aspect-ratio: 4 / 3;
+}
 
     .secondary-nav>nav>ul>li>ul.sub-menu>li>a {
         width: calc(100% - 40px);
