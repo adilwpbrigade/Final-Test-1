@@ -1099,11 +1099,26 @@ span.tab-btn {
 /* ------------------------------- Form section ------------------------- */
 
 .Form-section {
-    background: var(--background-primary);
+   position: relative;
     padding: 35px 0px;
 
 }
-
+.Form-section::before{
+     content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(8, 81, 45, 1); /* color you want to dodge */
+  mix-blend-mode: color-dodge;
+  pointer-events: none; /* optional */
+  z-index: 1;
+}
+.Form-section > *{
+    position: relative;
+    z-index: 2;
+}
 .form-container {
     width: 571.82px;
     padding: 0px 15px;
