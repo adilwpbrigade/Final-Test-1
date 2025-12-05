@@ -6,10 +6,13 @@
     --color-secondary: rgba(8, 81, 45, 0.5);
     --color-danger: rgba(27, 125, 59, 0.4);
     --color--green: rgba(9, 198, 71, 0.5);
+
     --background-primary: linear-gradient(rgba(27, 125, 59, 0.5), rgba(27, 125, 59, 0.5)),
         url('../images/background-img.png');
     --background-secondary: linear-gradient(rgba(8, 81, 45, 0.5), rgba(8, 81, 45, 0.5)),
         url('../images/background-img.png');
+     --background-danger:linear-gradient(rgba(9, 198, 71, 0.5), rgba(9, 198, 71, 0.5)),
+        url('../images/background-img.png');   
     /* Fonts */
     --font--roboto: "Roboto", sans-serif;
     --font--oswald: "Oswald", sans-serif;
@@ -91,14 +94,20 @@ h3 {
     color: rgba(27, 125, 59, 1);
     ;
 }
+.top-bar a:hover{
+    text-decoration: underline;
+}
 
 .top-bar .container-fluid img {
     position: absolute;
     top: 50%;
     right: 30px;
     transform: translateY(-50%);
+        transition: all 0.3s;
 }
-
+.top-bar .container-fluid img:hover {
+    transform: translateY(-50%) scale(1.1);
+}
 /* ================= PRIMARY NAV ================= */
 .primary-nav {
     padding: 4px 0;
@@ -173,7 +182,7 @@ h3 {
 /* ================= SECONDARY NAV ================= */
 /* ================= SECONDARY NAV ================= */
 .secondary-nav {
-    background-color: var(--color-danger);
+    background: var( --background-primary);
 }
 
 .secondary-nav>nav {
@@ -223,12 +232,9 @@ h3 {
 .secondary-nav>nav>form>input {
     width: 255px;
     height: 40px;
-    /* adjust to your desired height */
     padding: 0 50px 0 15px;
-    /* only left/right padding */
     line-height: 40px;
-    /* same as height */
-    background-image: url('../images/background-img.png');
+    background-color: rgba(1, 44, 31, 1);
     border: 0;
     font-family: var(--font--oswald);
     font-size: 16px;
@@ -264,8 +270,7 @@ h3 {
     display: none;
     z-index: 999;
     padding: 10px 0px;
-    /* remove li padding */
-
+    
 }
 .secondary-nav>nav>ul>li>ul.sub-menu > li{
     position: relative;
@@ -287,8 +292,7 @@ h3 {
 
 .secondary-nav>nav>ul>li:hover>ul.sub-menu {
     display: block;
-    background: linear-gradient(rgba(9, 198, 71, 0.5), rgba(9, 198, 71, 0.5)),
-        url('../images/background-img.png');
+    background: var(--background-danger);
     ;
 }
 
@@ -332,8 +336,7 @@ h3 {
 ul.sub-sub-menu {
     list-style: none;
     background:
-        linear-gradient(rgba(9, 198, 71, 0.5), rgba(9, 198, 71, 0.5)),
-        url('../images/background-img.png');
+        var(--background-danger);
     box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.25);
     width: 200px;
     position: absolute;
@@ -367,7 +370,7 @@ ul.sub-sub-menu>li:hover {
 /* ================= Reebok section ================= */
 
 .reebook-logo {
-    background-color: var(--color--green);
+    background:var(--background-danger);
     overflow: hidden;
 }
 
@@ -556,7 +559,7 @@ header {
 /* HERO SECTION */
 .hero-section {
     width: 100%;
-    background-image: linear-gradient(rgba(1, 44, 31, 0.7), rgba(1, 44, 31, 0.7)), url('../images/hero-image.png');
+    background-image: linear-gradient(rgba(1, 44, 31, 0.8), rgba(1, 44, 31, 0.8)), url('../images/hero-image.png');
     background-size: cover;
     background-position: center;
     display: flex;
@@ -737,14 +740,14 @@ header {
 
 .search-card-form {
     padding: 20px;
-    background: linear-gradient(rgba(9, 198, 71, 0.5), rgba(9, 198, 71, 0.5)),
-        url('../images/background-img.png');
+    background: var(--background-danger)
 }
 
 .search-card-form>input {
     width: 100%;
     padding: 10px 12px;
     margin-top: 6px;
+    font-family: var(--font--roboto);
 }
 
 .search-card-form>input::placeholder {
@@ -778,8 +781,7 @@ header {
 }
 
 .search-card-form>button:hover {
-    background: linear-gradient(rgba(9, 198, 71, 0.5), rgba(9, 198, 71, 0.5)),
-        url('../images/background-img.png');
+    background: var(--background-danger);
 }
 
 /* ------------------------------------EVENTS----------------------------------------------------- */
@@ -796,8 +798,7 @@ header {
 }
 
 .events-main {
-    background: linear-gradient(rgba(9, 198, 71, 0.5), rgba(9, 198, 71, 0.5)),
-        url('../images/background-img.png');
+    background: var(--background-danger);
     padding: 20px 20px 30px 20px;
     counter-reset: item;
     /* reset counter */
@@ -871,8 +872,7 @@ header {
 
 .categories-main {
     padding: 20px;
-    background: linear-gradient(rgba(9, 198, 71, 0.5), rgba(9, 198, 71, 0.5)),
-        url('../images/background-img.png');
+    background: var(--background-danger);
 }
 
 .categories-main ul {
@@ -913,8 +913,7 @@ header {
 }
 
 .categories-main-2 {
-    background: linear-gradient(rgba(9, 198, 71, 0.5), rgba(9, 198, 71, 0.5)),
-        url('../images/background-img.png');
+    background: var(--background-danger);
     padding: 5px 19px 53px 19px;
 }
 
@@ -1005,11 +1004,11 @@ span.tab-btn {
 }
 
 .tab button:hover {
-    background-color: var(--color--green);
+    background: var(--background-danger);
 }
 
 .tab button.active {
-    background-color: var(--color--green);
+    background: var(--background-danger);
 }
 
 .tab-section {
@@ -1022,7 +1021,7 @@ span.tab-btn {
     padding: 29px 28px 83px 36px;
 
     border-top: none;
-    background-color: var(--color--green);
+  background: var(--background-danger);
 }
 
 .tabcontent p {
@@ -1054,6 +1053,10 @@ span.tab-btn {
     font-size: 18px;
     line-height: 100%;
     background: var(--background-primary);
+
+}
+.accordion-header:hover{
+       background: var(--background-danger);
 }
 
 .accordion-arrow {
@@ -1072,9 +1075,9 @@ span.tab-btn {
 }
 
 /* When the header is active (open) rotate arrow upward */
-.accordion-header.active .accordion-arrow {
+.accordion-item.active .accordion-arrow {
 
-    transform: translateY(-50%) rotate(225deg);
+    transform: translateY(-25%) rotate(-135deg);
     /* ▼ downward by default */
 }
 
@@ -1253,8 +1256,7 @@ span.tab-btn {
 
 .post-content {
     padding: 17px 10px 26px 10px;
-    background: linear-gradient(rgba(9, 198, 71, 0.5), rgba(9, 198, 71, 0.5)),
-        url('../images/background-img.png');
+    background: var(--background-danger);
     flex: 1;
     /* makes content take up remaining space */
 }
@@ -1360,14 +1362,12 @@ span.tab-btn {
 .national-champions .card {
     display: flex;
     min-height: 238px;
-    background: linear-gradient(rgba(9, 198, 71, 0.5), rgba(9, 198, 71, 0.5)),
-        url('../images/background-img.png');
+    background: var(--background-danger);
 }
 
 /* Alternate layout using nth-child */
 .national-champions .card:nth-child(old) {
-    background: linear-gradient(rgba(9, 198, 71, 0.5), rgba(9, 198, 71, 0.5)),
-        url('../images/background-img.png');
+    background: var(--background-danger);
 }
 
 
