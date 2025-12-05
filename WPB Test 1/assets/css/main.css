@@ -115,7 +115,6 @@ h3 {
     justify-content: space-between;
     align-items: center;
     min-height: 60px;
-
 }
 
 .primary-nav .hamburger {
@@ -429,6 +428,7 @@ ul.sub-sub-menu>li:hover {
 .footer-spacing {
     padding-top: 33px;
     padding-bottom: 33px;
+    min-height: 158px;
 }
 
 .footer-nav ul {
@@ -1249,7 +1249,8 @@ span.tab-btn {
 }
 
 .post img {
-    width: 100%;
+    width: 85%;
+    margin: auto;
     /* full width */
     display: block;
     max-height: 162px;
@@ -1264,7 +1265,7 @@ span.tab-btn {
 
     max-width: calc((100% - 60px) / 3);
     overflow: hidden;
-
+     background-color: white;
     display: flex;
     flex-direction: column;
 }
@@ -1294,6 +1295,7 @@ span.tab-btn {
 
     background: var(--background-primary);
     text-align: center;
+   
 }
 
 .footer button {
