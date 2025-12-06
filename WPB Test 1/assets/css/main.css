@@ -298,10 +298,14 @@ h3 {
 .main-section-prev svg {
     transform: rotate(180deg);
 }
-
-.secondary-nav>nav>form>input::placeholder {
+input[type="search"]::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    appearance: none;
+}
+.secondary-nav>nav>form>input[type="search"]::placeholder {
     color: white;
     opacity: 0.5;
+    text-transform: uppercase;
 }
 
 
