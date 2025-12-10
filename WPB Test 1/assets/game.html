@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gradient Tic-Tac-Toe (Single File)</title>
+    
+    <style>
+        /* CSS STYLES */
+        :root {
+            /* Define gradient colors */
+            --bg-gradient: linear-gradient(135deg, #1f043e 0%, #3e1b7c 100%); /* Dark Purple */
+            --board-color: rgba(255, 255, 255, 0.1);
+            
+            /* Cross (X) Gradient - Fiery Red/Orange */
+            --x-gradient: radial-gradient(circle at 50% 50%, #ffc0cb, #ff007f); 
+            
+            /* Circle (O) Gradient - Cool Blue/Cyan */
+            --o-gradient: radial-gradient(circle at 50% 50%, #a0c4ff, #0077b6); 
+            
+            --win-color: #ffe082; /* Light yellow for win highlight */
+        }
+
+        /* --- General Styling & Background Gradient --- */
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            /* Apply the main background gradient */
+            background: var(--bg-gradient); 
+            color: white;
+        }
+
+        .container {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        #status {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            font-weight: bold;
+            color: var(--win-color);
+        }
+
+        /* --- Game Board and Cells --- */
+        #game-board {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            grid-template-rows: repeat(3, 100px);
+            gap: 8px; /* Spacing between cells */
+            margin: 0 auto 20px;
+            background: var(--board-color); /* Subtle board background */
+            padding: 8px;
+            border-radius: 10px;
+        }
+
+        .cell {
+            width: 100px;
+            height: 100px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 4em;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+        }
+
+        .cell:hover:not(.x):not(.o) {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        /* --- Symbol Styling with Gradients and Effects --- */
+
+        /* X Symbol (Cross) */
+        .cell.x {
+            /* Create the 'X' using two pseudo-elements (lines) */
+            position: relative;
+            cursor: default;
+        }
+
+        .cell.x::before, .cell.x::after {
+            content: '';
+            position: absolute;
+            width: 80%;
+            height: 10px;
+            background: var(--x-gradient); /* Apply Cross Gradient */
+            border-radius: 5px;
+            box-shadow: 0 0 15px rgba(255, 0, 127, 0.8); /* Glow effect */
+        }
+
+        .cell.x::before {
+            transform: rotate(45deg);
+        }
+
+        .cell.x::after {
+            transform: rotate(-45deg);
+        }
+
+        /* O Symbol (Circle) */
+        .cell.o {
+            /* Create the 'O' using a single radial gradient border */
+            position: relative;
+            cursor: default;
+            border-radius: 50%; /* Make the cell look more circular */
+            border: 10px solid transparent; /* Placeholder for the border width */
+            
+            /* Magic: Use a mask to apply the gradient only to the border area */
+            background-image: var(--o-gradient); /* Apply Circle Gradient */
+            background-origin: border-box;
+            background-clip: content-box, border-box;
+            box-shadow: 0 0 15px rgba(0, 119, 182, 0.8); /* Glow effect */
+            
+            /* Hide the default background and content */
+            background-color: transparent;
+        }
+        /* Ensure the inside of the O is hollow/transparent */
+        .cell.o::before {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            right: 5px;
+            bottom: 5px;
+            border-radius: 50%;
+            background: var(--bg-gradient); /* Use background gradient to "punch out" the middle */
+            z-index: 1;
+        }
+
+        /* --- Win State Highlighting --- */
+        .cell.win {
+            background: var(--win-color);
+            transform: scale(1.05);
+        }
+
+        /* --- Button Styling --- */
+        #reset-button {
+            padding: 10px 20px;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            background: linear-gradient(45deg, #1e90ff, #00ced1); /* Button Gradient */
+            color: white;
+            font-weight: bold;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        #reset-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>✨ Gradient Tic-Tac-Toe ✨</h1>
+        <div id="status">Player X's Turn</div>
+
+        <div id="game-board">
+            <div class="cell" data-index="0"></div>
+            <div class="cell" data-index="1"></div>
+            <div class="cell" data-index="2"></div>
+            <div class="cell" data-index="3"></div>
+            <div class="cell" data-index="4"></div>
+            <div class="cell" data-index="5"></div>
+            <div class="cell" data-index="6"></div>
+            <div class="cell" data-index="7"></div>
+            <div class="cell" data-index="8"></div>
+        </div>
+
+        <button id="reset-button">Restart Game</button>
+    </div>
+
+    <script>
+        // JAVASCRIPT LOGIC
+        // --- 1. Game State Variables ---
+        const cells = document.querySelectorAll('.cell');
+        const statusDisplay = document.getElementById('status');
+        const resetButton = document.getElementById('reset-button');
+
+        // Represents the board: 0-8. ' ' is empty, 'X' or 'O' marks the player.
+        let gameState = ['', '', '', '', '', '', '', '', ''];
+        let currentPlayer = 'X';
+        let gameActive = true;
+
+        // The possible winning combinations (indices of the gameState array)
+        const winningConditions = [
+            [0, 1, 2], // Row 1
+            [3, 4, 5], // Row 2
+            [6, 7, 8], // Row 3
+            [0, 3, 6], // Column 1
+            [1, 4, 7], // Column 2
+            [2, 5, 8], // Column 3
+            [0, 4, 8], // Diagonal 1
+            [2, 4, 6]  // Diagonal 2
+        ];
+
+        // --- 2. Message Functions ---
+        const messages = {
+            win: (player) => `${player} Wins! 🎉`,
+            draw: 'Game is a Draw! 🤝',
+            turn: (player) => `Player ${player}'s Turn`
+        };
+
+        // --- 3. Core Logic Functions ---
+
+        function handleCellPlayed(clickedCell, clickedCellIndex) {
+            // 1. Update the state and cell visuals
+            gameState[clickedCellIndex] = currentPlayer;
+            clickedCell.classList.add(currentPlayer.toLowerCase()); // Adds 'x' or 'o' class for styling
+            clickedCell.setAttribute('data-content', currentPlayer); 
+
+            handleResultValidation();
+        }
+
+        function handleResultValidation() {
+            let roundWon = false;
+            let winningLine = [];
+
+            // Check all winning conditions
+            for (let i = 0; i < winningConditions.length; i++) {
+                const winCondition = winningConditions[i];
+                let a = gameState[winCondition[0]];
+                let b = gameState[winCondition[1]];
+                let c = gameState[winCondition[2]];
+
+                if (a === '' || b === '' || c === '') {
+                    continue;
+                }
+
+                if (a === b && b === c) {
+                    roundWon = true;
+                    winningLine = winCondition;
+                    break;
+                }
+            }
+
+            if (roundWon) {
+                // Handle Win
+                statusDisplay.innerHTML = messages.win(currentPlayer);
+                gameActive = false;
+                
+                // Highlight winning cells
+                winningLine.forEach(index => {
+                    cells[index].classList.add('win');
+                });
+                return;
+            }
+
+            // Check for Draw (no empty spaces left)
+            let roundDraw = !gameState.includes('');
+            if (roundDraw) {
+                statusDisplay.innerHTML = messages.draw;
+                gameActive = false;
+                return;
+            }
+
+            // Continue the game (switch player)
+            handlePlayerChange();
+        }
+
+        function handlePlayerChange() {
+            currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+            statusDisplay.innerHTML = messages.turn(currentPlayer);
+        }
+
+        // --- 4. Event Handlers ---
+
+        function handleCellClick(event) {
+            const clickedCell = event.target;
+            const clickedCellIndex = parseInt(clickedCell.getAttribute('data-index'));
+
+            // Check if the cell is already played or if the game is over
+            if (gameState[clickedCellIndex] !== '' || !gameActive) {
+                return;
+            }
+
+            handleCellPlayed(clickedCell, clickedCellIndex);
+        }
+
+        function handleRestartGame() {
+            gameActive = true;
+            currentPlayer = 'X';
+            gameState = ['', '', '', '', '', '', '', '', ''];
+            statusDisplay.innerHTML = messages.turn(currentPlayer);
+
+            // Clear all cell visuals
+            cells.forEach(cell => {
+                cell.classList.remove('x', 'o', 'win');
+                cell.removeAttribute('data-content');
+            });
+        }
+
+        // --- 5. Initialization ---
+        cells.forEach(cell => cell.addEventListener('click', handleCellClick));
+        resetButton.addEventListener('click', handleRestartGame);
+
+        // Set initial status message
+        statusDisplay.innerHTML = messages.turn(currentPlayer);
+    </script>
+</body>
+</html>
