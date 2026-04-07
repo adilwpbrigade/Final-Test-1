@@ -81,13 +81,24 @@ $(document).ready(function () {
         $(document).off(".mobileMenu");
     }
 
+    // ============================================================
+    //  SYNC MENU HANDLERS (FIX: CLOSE MOBILE MENUS ON DESKTOP)
+    // ============================================================
     function syncMenuHandlers() {
         if (isMobile()) {
             bindMobileMenus();
         } else {
             removeMobileMenus();
-            $(".sub-menu, .sub-sub-menu").removeClass("open").removeAttr("style");
+
+            // FULL RESET WHEN GOING TO DESKTOP
+            $(".sub-menu, .sub-sub-menu")
+                .stop(true, true)
+                .slideUp(0)
+                .removeClass("open")
+                .removeAttr("style");
+
             $(".submenu-toggle, .subsubmenu-toggle").removeClass("active");
+
             $(".secondary-nav").show();
             $("body").css("overflow", "");
         }
@@ -146,26 +157,21 @@ $(document).ready(function () {
     });
 
     // ============================================================
-    //  SMOOTH ACCORDION  ⭐ (UPDATED SECTION)
+    //  SMOOTH ACCORDION
     // ============================================================
-  $('.accordion-item').removeClass('active');
+    $('.accordion-item').removeClass('active');
     $('.accordion-content').hide();
 
-    // -----------------------
-    // ACCORDION (Smooth Expand)
-    // -----------------------
-  $('.accordion-header').on('click', function () {
+    $('.accordion-header').on('click', function () {
         const item = $(this).closest('.accordion-item');
         const content = item.find('.accordion-content');
 
-        // Close all others
         item.siblings('.accordion-item')
             .removeClass('active')
             .find('.accordion-content')
             .stop(true, true)
             .slideUp(300);
 
-        // Toggle current
         if (item.hasClass('active')) {
             item.removeClass('active');
             content.stop(true, true).slideUp(300);
@@ -175,18 +181,15 @@ $(document).ready(function () {
         }
     });
 
-    // OPEN FIRST ACCORDION ON LOAD
     const firstItem = $('.accordion-item').first();
     firstItem.addClass('active');
     firstItem.find('.accordion-content').slideDown(300);
-   
+
     // ============================================================
     //  VIDEO POPUP
     // ============================================================
-
     function convertToEmbed(url) {
         let videoId = "";
-
         if (url.includes("youtu.be/")) {
             videoId = url.split("youtu.be/")[1].split(/[?&]/)[0];
         } else if (url.includes("watch?v=")) {
@@ -194,7 +197,6 @@ $(document).ready(function () {
         } else if (url.includes("embed/")) {
             return url;
         }
-
         return "https://www.youtube.com/embed/" + videoId;
     }
 
